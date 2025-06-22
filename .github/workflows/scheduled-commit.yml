@@ -2,8 +2,11 @@ name: Daily Scheduled Commit
 
 on:
   schedule:
-    - cron: "2 14 * * *"  # ✅ Runs daily at 7:32 PM IST (14:02 UTC)
+    - cron: "2 14 * * *"  # ✅ 7:32 PM IST
   workflow_dispatch:
+
+permissions:
+  contents: write  # ✅ Required to allow commit/push
 
 jobs:
   auto-commit:
@@ -15,7 +18,7 @@ jobs:
       - name: Dummy Commit by 22f2001644@ds.study.iitm.ac.in
         run: |
           echo "Last updated on $(date -u +'%Y-%m-%dT%H:%M:%S.%NZ')" > last-update.txt
-          cat last-update.txt  # Just to show the file content in logs
+          cat last-update.txt
 
       - name: Commit and Push Changes
         run: |
